@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>   
+<!--Import some libraries that have classes that we need -->
 <%@ page import="java.io.*, java.util.*, java.sql.*"%>
 <%@ page import="javax.servlet.http.*, javax.servlet.*, packageforDatabase.*"%>
 <!DOCTYPE html>
@@ -37,7 +38,7 @@
 		
 	
 		
-		if (UserName != null || UserName != "" || UserPassword != null || UserPassword != ""){
+		if (UserName != null && UserName != "" && UserPassword != null && UserPassword != ""){
 			while(result.next()){
 				//Usernmae and password from database, line by line in "result"
 				userNameDB = result.getString("userName");
@@ -47,7 +48,7 @@
 				if(userNameDB.equals(UserName) && userPasswordDB.equals(UserPassword)){
 					//I believe thise passes on information into the Session so it can be used later 
 					session.setAttribute("username", UserName);
-					session.setAttribute("password", UserPassword);
+					
 					//Distinguish admin vs common user
 					if(UserName.equals("Admin") && UserPassword.equals("AdminPass")){
 						session.setAttribute("userType", "admin");
@@ -63,7 +64,7 @@
 			
 			
 		}else{
-			response.sendRedirect("LoginPage.jsp");
+			response.sendRedirect(redirectLink);
 		}
 
 		
