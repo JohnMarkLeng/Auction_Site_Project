@@ -9,9 +9,25 @@
 	
 	
 	<body>
-		<h1>HOME PAGE!</h1>
-		<form method="post" action="LogoutVerification.jsp">
+		<div>
+			<form method="post" action="LogoutVerification.jsp">
 				<input type="submit" value="Logout">
 			</form>
+		</div>
+		
+	
+		<br>
+		
+		<form method="post" action="ListingInfoPage.jsp">
+
+				<input type="submit" value="Create A Listing">
+		</form>
+		
+		<h1>HOME PAGE!</h1>
+		
+		
+		
+		
+	
 	</body>
 </html>

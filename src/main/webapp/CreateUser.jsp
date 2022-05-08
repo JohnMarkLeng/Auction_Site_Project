@@ -17,15 +17,6 @@
 			
 			
 			String redirectLink = "LoginPage.jsp";
-			 
-			
-			//Database Connection
-			DB_Connection db = new DB_Connection();	
-			Connection con = db.getConnection();
-			
-			
-			//Create SQL statement
-			Statement stmt = con.createStatement();
 			
 			
 			String fName = request.getParameter("fName");
@@ -37,6 +28,14 @@
 			String phoneNumber = request.getParameter("phoneNumber");
 			
 			if(fName != null && fName != "" && lName != null && lName != "" && username != null && username != "" && password != null && password != "" && email != null && email != "" && address != null && address != "" && phoneNumber != null && phoneNumber != ""){
+				
+				//Database Connection
+				DB_Connection db = new DB_Connection();	
+				Connection con = db.getConnection();
+				
+				
+				//Create SQL statement
+				Statement stmt = con.createStatement();
 				
 				PreparedStatement createUser = con.prepareStatement("INSERT INTO Member values (NULL, ?, ?, ?, ?, ?, ?, NULL, ?, NULL, NULL)");
 				createUser.setString(1, fName);

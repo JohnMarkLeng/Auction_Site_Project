@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>   
 <!--Import some libraries that have classes that we need -->
-<%@ page import="java.io.*, java.util.*, java.sql.*"%>
+<%@ page import="java.io.*, java.util.*, java.sql.*, java.math.BigInteger"%>
 <%@ page import="javax.servlet.http.*, javax.servlet.*, packageforDatabase.*"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@
 		String UserName = request.getParameter("username");
 		String UserPassword = request.getParameter("password");
 		
-		String sqlQuery = "SELECT userName, userPassword FROM Member;";
+		String sqlQuery = "SELECT userName, userPassword, member_ID FROM Member;";
 		
 		
 		//Database Connection
@@ -43,11 +43,13 @@
 				//Usernmae and password from database, line by line in "result"
 				userNameDB = result.getString("userName");
 				userPasswordDB = result.getString("userPassword");
+				long member_IDDB = (long) result.getObject("member_ID");
 				
 				//check username and password given by user match with the database
 				if(userNameDB.equals(UserName) && userPasswordDB.equals(UserPassword)){
 					//I believe thise passes on information into the Session so it can be used later 
 					session.setAttribute("username", UserName);
+					session.setAttribute("member_ID", member_IDDB);
 					
 					//Distinguish admin vs common user
 					if(UserName.equals("Admin") && UserPassword.equals("AdminPass")){
