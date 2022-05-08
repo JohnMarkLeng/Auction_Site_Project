@@ -54,10 +54,11 @@
 					//Distinguish admin vs common user
 					if(UserName.equals("Admin") && UserPassword.equals("AdminPass")){
 						session.setAttribute("userType", "admin");
+						redirectLink = "AdminPage.jsp";
 					}else{
 						session.setAttribute("userType", "commonUser");
+						redirectLink = "HomePage.jsp";
 					}
-					redirectLink = "HomePage.jsp";
 					break;
 				}
 			}
