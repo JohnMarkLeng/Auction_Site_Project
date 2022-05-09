@@ -50,5 +50,32 @@
 		</div>
 		
 		
+		<%
+		
+		if(session.getAttribute("userType") == "admin"){
+		%>
+			<%
+				String msgError = (String) session.getAttribute("createListingError");
+				if(errorMsg == "Error"){
+			%>
+					<p>Please Try Listing Again</p>
+			<%
+				session.removeAttribute("createListingError");
+				}
+			%>
+			
+			<div>
+				<form method="post" action="DeleteListing.jsp">
+	
+					<input type="text" name="title" placeholder="Title:">
+		
+					<input type="submit" value="Delete Listing">
+				</form>
+			</div>
+		
+		<%
+		}
+		%>
+		
 	</body>
 </html>

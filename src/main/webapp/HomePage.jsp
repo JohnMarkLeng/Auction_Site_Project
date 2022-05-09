@@ -27,11 +27,11 @@
 		</form>
 		
 		
-		
+		<br>
+		<br>
 		<div>
 			<form method="post" action="searchFunction.jsp">
 				<input type="text" value="Title">
-				<br>
 				<input type="submit" value="Search">
 			</form>
 			
@@ -40,6 +40,7 @@
 		<div>
 		
 			<%
+				long item_ID = -100;
 				String title = null;
 				String description = null;
 				double startPrice = 0;
@@ -62,6 +63,7 @@
 			
 				
 				while(result.next()){
+					item_ID = result.getLong("item_ID");
 					title = result.getString("title");
 					description = result.getString("itemDescription");
 					startPrice = result.getDouble("startPrice");
@@ -79,6 +81,19 @@
 						<p>Start Date: <%= startDate %></p>
 						<p>End Date: <%= endDate %></p>
 						
+						<form method="post" action="BidPage.jsp">
+						
+							<input type="hidden" name="title" value="<%= title%>"> 
+							<input type="hidden" name="description" value="<%= description%>"> 
+							<input type="hidden" name="startPrice" value="<%= startPrice%>"> 
+							<input type="hidden" name="highestCurrBid" value="<%= highestCurrBid%>"> 
+							<input type="hidden" name="startDate" value="<%= startDate%>"> 
+							<input type="hidden" name="endDate" value="<%= endDate%>"> 
+							<input type="hidden" name="item_ID" value="<%= item_ID%>"> 
+							
+	
+							<input type="submit" value="Bid">
+						</form>
 						<br>
 						<br>
 						
@@ -98,6 +113,30 @@
 			
 			%>
 		
+		</div>
+		
+		<div>
+			<h1>Comment Section | Customer Service</h1>
+			<%
+				String msgErr = (String) session.getAttribute("createCommentError");
+				if(msgErr == "Error"){
+			%>
+					<p>Please try again</p>
+			<%
+				session.removeAttribute("createCommentError");
+				}
+			%>
+		</div>
+		<div>
+			<form method="post" action="CustomerQuestionAndReply.jsp">
+				<input type="text" name="name" placeholder="Name:">
+				<br>
+				<input type="text" name="title" placeholder="Title:">
+				<br>
+				<input type="text" name="commentDescription" placeholder="Comment Description:">
+				<br>
+				<input type="submit" value="Submit">
+			</form>
 		</div>
 		
 		
